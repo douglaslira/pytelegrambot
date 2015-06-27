@@ -8,6 +8,15 @@ class PhotoSize(object):
         self.height = height
         self.file_size = file_size
 
+    def __init__(self, jsonString):
+        self.file_id = jsonString['file_id']
+        self.width = int(jsonString['width'])
+        self.height = int(jsonString['height'])
+        if 'file_size' in jsonString.keys():
+            self.file_size = int(jsonString['file_size'])
+        else:
+            self.file_size = None
+
     def get_file_id(self):
         return self.file_id
 
@@ -19,3 +28,6 @@ class PhotoSize(object):
 
     def get_file_size(self):
         return self.file_size
+
+    def __str__(self):
+        return str(__dict__)

@@ -6,6 +6,10 @@ class Location(object):
         self.longitude = longitude
         self.latitude = latitude
 
+    def __init__(self, jsonString):
+        self.longitude = float(jsonString['longitude'])
+        self.latitude = float(jsonString['latitude'])
+
     def get_longitude(self):
         return self.longitude
 

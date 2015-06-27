@@ -8,6 +8,20 @@ class Contact(object):
         self.last_name = last_name
         self.phone_number = phone_number
 
+    def __init__(self, jsonString):
+        self.phone_number = jsonString['phone_number']
+        self.first_name = jsonString['first_name']
+
+        if 'last_name' in jsonString.keys():
+            self.last_name = jsonString['last_name']
+        else:
+            self.last_name = None
+
+        if 'user_id' in jsonString.keys():
+            self.user_id = jsonString['user_id']
+        else:
+            self.user_id = None
+
     def get_id(self):
         return self.user_id
 
