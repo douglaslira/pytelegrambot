@@ -1,1 +1,4 @@
 .idea*
+.__pycache__*
+telegram/__pycache__*
+telegram_methods/__pycache__*
