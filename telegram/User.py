@@ -8,7 +8,7 @@ class User:
         self.last_name = last_name
         self.user_name = user_name
 
-    def __init__(self,jsonString):
+    def __init__(self, jsonString):
         self.user_id = jsonString['id']
         self.first_name = jsonString['first_name']
         if 'last_name' in jsonString.keys():
