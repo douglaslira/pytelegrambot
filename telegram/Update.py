@@ -13,7 +13,7 @@ class Update:
         return self.message
 
     def __str__(self):
-        return str(__dict__)
+        return str(self.__dict__)
 
     def __eq__(self, other):
-        return __dict__ == other.__dict__
+        return self.__dict__ == other.__dict__
