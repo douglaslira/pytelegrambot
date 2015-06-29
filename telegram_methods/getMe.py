@@ -17,7 +17,10 @@ def getMe(my_bot):
 '''
 ## Testing
 base_url = "https://api.telegram.org/bot"
-auth_token = "122152894:AAHV8afbjO_f4tPzmn-W8vLd7OWzWmxIbdw"
+auth_file_name = "../bots/doloresBot.auth"
+auth_file = open(auth_file_name, 'r')
+auth_token = auth_file.read()
+auth_file.close()
 myBotUrl = base_url+auth_token
 
 telUser = getMe(myBotUrl)

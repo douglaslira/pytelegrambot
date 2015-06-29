@@ -33,4 +33,4 @@ class Audio(object):
         return self.file_size
 
     def __str__(self):
-        return str(__dict__)
+        return str(self.__dict__)

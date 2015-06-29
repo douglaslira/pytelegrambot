@@ -8,16 +8,17 @@ import telegram.Message
 import telegram.User
 import telegram.GroupChat
 
-
 base_url = "https://api.telegram.org/bot"
-auth_token = "122152894:AAHV8afbjO_f4tPzmn-W8vLd7OWzWmxIbdw"
+auth_file_name = "doloresBot.auth"
+auth_file = open(auth_file_name, 'r')
+auth_token = auth_file.read()
+auth_file.close()
 
 bot_generic_message = "Hello, I am Dead End Dolores. I like turning left at dead ends and Harry Potter."
-
 my_bot = base_url + auth_token
 
-last_update_id = 0 # On first run last update was 0
-
+# On first run last update was 0
+last_update_id = 0
 
 while True:
     updates = telegram_methods.getUpdates.getUpdates(my_bot, last_update_id, None, None)
@@ -25,11 +26,13 @@ while True:
     for count in range(0, len(updates)):
         updateObj = updates[0]
         messageObj = updateObj.get_message()
-        print(messageObj.get_text()) # Debugging Purposes
+        # Debugging start
+        print(messageObj.get_text())
         print(messageObj)
-        if messageObj.get_text() == "/kshiraja":
+        # Debugging end
+        if messageObj.get_text() == "/dalores":
             chatObj = messageObj.get_chat()
-            if(type(chatObj) == telegram.GroupChat.GroupChat):
+            if type(chatObj) == telegram.GroupChat.GroupChat:
                 chat_id = chatObj.get_user_id()
                 telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
             else:

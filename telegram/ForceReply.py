@@ -11,3 +11,6 @@ class ForceReply(object):
 
     def get_selective(self):
         return self.selective
+
+    def __str__(self):
+        return str(self.__dict__)

@@ -1,9 +1,18 @@
 # Readme
 -------------
 
-These are Telegram bots to allow us to do various tasks from our group account. 
+These are Telegram bots to allow us to do various tasks from our group account. Currently a simple
+ bot, doloresBot that replies "hello, World" is created to test all the telegram bot API.
+ 
+# Install
+_________
 
-# Wishlist for Bots
+1. Run __pip install__ to install the project. 
+2. Add the auth code for the bot in the __<bot-name>.auth__ file. Do not add a new line at end of the auth code.
+3. Run the bot __python <bot-name>__
+
+
+# Wish-list for Bots
 -------------------
 
 1. Post to our official Twitter and Facebook accounts
@@ -12,6 +21,6 @@ These are Telegram bots to allow us to do various tasks from our group account.
 
 ## Bots for fun
 ----------------
-4. Kshiraja lunch bot
-5. Nivi's plant watering bot
-6. Sruthi's secret code bot
+4. Lunch bot
+5. Plant watering bot
+6. Code status bot

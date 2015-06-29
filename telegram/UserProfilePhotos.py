@@ -12,3 +12,5 @@ class UserProfilePhotos(object):
     def get_photos(self):
         return self.photos
 
+    def __str__(self):
+        return str(self.__dict__)

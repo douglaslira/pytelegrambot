@@ -33,3 +33,6 @@ class Contact(object):
 
     def get_phone_number(self):
         return self.phone_number
+
+    def __str__(self):
+        return str(self.__dict__)

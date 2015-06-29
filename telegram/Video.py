@@ -55,3 +55,6 @@ class Video(object):
 
     def get_caption(self):
         return self.caption
+
+    def __str__(self):
+        return str(self.__dict__)

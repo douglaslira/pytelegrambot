@@ -17,4 +17,4 @@ class GroupChat(object):
         return self.title
 
     def __str__(self):
-        return str(__dict__)
+        return str(self.__dict__)

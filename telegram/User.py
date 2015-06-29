@@ -34,4 +34,4 @@ class User:
         return self.user_name
 
     def __str__(self):
-        return str(__dict__)
+        return str(self.__dict__)

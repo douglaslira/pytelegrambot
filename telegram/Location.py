@@ -18,3 +18,6 @@ class Location(object):
 
     def get_latlon(self):
         return self.latitude, self.longitude
+
+    def __str__(self):
+        return str(self.__dict__)
