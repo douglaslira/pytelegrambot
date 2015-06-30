@@ -2,4 +2,5 @@
 .__pycache__*
 telegram/__pycache__*
 telegram_methods/__pycache__*
-bots/*.auth
+bots/doloresBot.auth
+*.auth
