@@ -1,12 +1,12 @@
 from distutils.core import setup
 
 setup(
-    name='fovtelergrambot',
-    version='',
+    name='pytelegrambot',
+    version='0.1',
     packages=['telegram', 'telegram_methods'],
     url='',
-    license='',
-    author='bubby',
-    author_email='',
-    description=''
+    license='GPL3',
+    author='harsha',
+    author_email='mail@kharsha.com',
+    description='Python module to use Telegram Bot API'
 )
