@@ -37,15 +37,27 @@ my_bot = base_url + auth_token
 
 # On first run last update was 0
 last_update_id = 0
+first_run = True
 
 while True:
     updates = telegram_methods.getUpdates.getUpdates(my_bot, last_update_id, None, None)
     print(len(updates),"Last ID:" + str(last_update_id))
+
+    # Ignore all old messages.
+    if first_run:
+        for count in range(0, len(updates)):
+            updateObj = updates[0]
+            messageObj = updateObj.get_message()
+            print(messageObj)
+        last_update_id = updateObj.get_update_id() + 1
+        first_run = False
+        continue
+
     for count in range(0, len(updates)):
         updateObj = updates[0]
         messageObj = updateObj.get_message()
         # Debugging start
-        print(messageObj.get_text())
+        #print(messageObj.get_text())
         print(messageObj)
         # Debugging end
         if messageObj.get_text() == "/dolores":
@@ -65,16 +77,10 @@ while True:
             if type(chatObj) == telegram.GroupChat.GroupChat:
                 status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
                 chat_id = chatObj.get_user_id()
-                try:
-                    telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
-                except:
-                    continue
+                telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
             else:
                 status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
                 chat_id = chatObj.get_id()
-                try:
-                    telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
-                except:
-                    continue
+                telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
 
         last_update_id = updateObj.get_update_id() + 1
