@@ -7,7 +7,7 @@ import telegram.Update
 import telegram.Message
 import telegram.User
 import telegram.GroupChat
-import utilities.tgtwitter
+import bot_utilities.tgtwitter
 import re
 
 base_url = "https://api.telegram.org/bot"
@@ -63,14 +63,14 @@ while True:
             tweet_message = tweet_message[:140]
             print(tweet_message)
             if type(chatObj) == telegram.GroupChat.GroupChat:
-                status = utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
+                status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
                 chat_id = chatObj.get_user_id()
                 try:
                     telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
                 except:
                     continue
             else:
-                status = utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
+                status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
                 chat_id = chatObj.get_id()
                 try:
                     telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
