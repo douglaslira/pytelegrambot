@@ -11,7 +11,7 @@ import bot_utilities.tgtwitter
 import re
 
 base_url = "https://api.telegram.org/bot"
-auth_file_name = "./bots/doloresBot.auth"
+auth_file_name = "../bots/doloresBot.auth"
 auth_file = open(auth_file_name, 'r')
 auth_token = auth_file.readline()
 consumer_key = auth_file.readline()
@@ -41,46 +41,57 @@ first_run = True
 
 while True:
     updates = telegram_methods.getUpdates.getUpdates(my_bot, last_update_id, None, None)
-    print(len(updates),"Last ID:" + str(last_update_id))
+    print(len(updates), "Last ID:" + str(last_update_id))
+
+    updateObj = None
+    messageObj = None
+
+    if len(updates) > 0:
+        updateObj = updates[0]
+        messageObj = updateObj.get_message()
 
     # Ignore all old messages.
     if first_run:
+        print(updates)
+        if len(updates) > 0:
+            last_update_id = updateObj.get_update_id() + 1
+        else:
+            last_update_id += 1
+        first_run = False
+
+    elif len(updates) == 0:
+        continue
+
+    else:
         for count in range(0, len(updates)):
             updateObj = updates[0]
             messageObj = updateObj.get_message()
+            # Debugging start
+            #print(messageObj.get_text())
             print(messageObj)
-        last_update_id = updateObj.get_update_id() + 1
-        first_run = False
-        continue
+            # Debugging end
+            if messageObj.get_text() == "/dolores":
+                chatObj = messageObj.get_chat()
+                if type(chatObj) == telegram.GroupChat.GroupChat:
+                    chat_id = chatObj.get_user_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
+                else:
+                    chat_id = chatObj.get_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
 
-    for count in range(0, len(updates)):
-        updateObj = updates[0]
-        messageObj = updateObj.get_message()
-        # Debugging start
-        #print(messageObj.get_text())
-        print(messageObj)
-        # Debugging end
-        if messageObj.get_text() == "/dolores":
-            chatObj = messageObj.get_chat()
-            if type(chatObj) == telegram.GroupChat.GroupChat:
-                chat_id = chatObj.get_user_id()
-                telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
-            else:
-                chat_id = chatObj.get_id()
-                telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
-
-        if "/tweet" in messageObj.get_text() and last_update_id > 0:
-            chatObj = messageObj.get_chat()
-            tweet_message = re.sub('\/tweet', '', messageObj.get_text())
-            tweet_message = tweet_message[:140]
-            print(tweet_message)
-            if type(chatObj) == telegram.GroupChat.GroupChat:
-                status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
-                chat_id = chatObj.get_user_id()
-                telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
-            else:
-                status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
-                chat_id = chatObj.get_id()
-                telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
+            if "/tweet" in messageObj.get_text() and last_update_id > 0:
+                chatObj = messageObj.get_chat()
+                tweet_message = re.sub('\/tweet', '', messageObj.get_text())
+                tweet_message = tweet_message[:140]
+                print(tweet_message)
+                if type(chatObj) == telegram.GroupChat.GroupChat:
+                    status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
+                    chat_id = chatObj.get_user_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
+                else:
+                    status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
+                    chat_id = chatObj.get_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, "Tweeted")# + status)
 
         last_update_id = updateObj.get_update_id() + 1
+
