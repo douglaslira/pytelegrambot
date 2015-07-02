@@ -40,10 +40,11 @@ def getUpdates(my_bot, offset, limit, timeout):
 '''
 ## Testing
 base_url = "https://api.telegram.org/bot"
-auth_file_name = "../bots/doloresBot.auth"
+auth_file_name = "./bots/doloresBot.auth"
 auth_file = open(auth_file_name, 'r')
 auth_token = auth_file.read()
 auth_file.close()
+auth_token = auth_token[:-1]
 myBotUrl = base_url+auth_token
 
 telUser = getUpdates(myBotUrl, 315634024, None, None)
