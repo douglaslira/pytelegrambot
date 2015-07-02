@@ -83,6 +83,9 @@ while True:
                 chatObj = messageObj.get_chat()
                 tweet_message = re.sub('\/tweet', '', messageObj.get_text())
                 tweet_message = tweet_message[:140]
+                if tweet_message == "":
+                    print("Empty Message")
+                    continue
                 print(tweet_message)
                 if type(chatObj) == telegram.GroupChat.GroupChat:
                     status = bot_utilities.tgtwitter.tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_message)
