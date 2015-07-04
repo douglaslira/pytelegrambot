@@ -33,6 +33,8 @@ print(access_token_secret )
 
 
 bot_generic_message = "Hello, I am Dead End Dolores. I like turning left at dead ends and Harry Potter."
+tejas_message = "how how"
+
 my_bot = base_url + auth_token
 
 # On first run last update was 0
@@ -78,6 +80,15 @@ while True:
                 else:
                     chat_id = chatObj.get_id()
                     telegram_methods.sendMessage.send_message(my_bot, chat_id, bot_generic_message)
+
+            if messageObj.get_text() == "/tejas":
+                chatObj = messageObj.get_chat()
+                if type(chatObj) == telegram.GroupChat.GroupChat:
+                    chat_id = chatObj.get_user_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, tejas_message)
+                else:
+                    chat_id = chatObj.get_id()
+                    telegram_methods.sendMessage.send_message(my_bot, chat_id, tejas_message)
 
             if "/tweet" in messageObj.get_text() and last_update_id > 0:
                 chatObj = messageObj.get_chat()
