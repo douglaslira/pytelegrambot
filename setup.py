@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='pytelegrambot',
     version='0.1',
-    packages=['telegram', 'telegram_methods', 'bot_utilities'],
+    packages=['telegram', 'telegram_methods', 'bot_utilities', 'tweepy'],
     url='',
     license='GPL3',
     author='harsha',
